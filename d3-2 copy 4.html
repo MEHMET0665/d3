@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>D3 pie</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+  <style>
+    .bar.hover{
+      fill:orange;
+    }
+  </style>
+  <p> d3 tutorial3 pie</p>
+  <script>
+     var data=[10,40,70,40,50,1]
+     var r=10;
+     var color=d3.scale.ordinal()
+          .range(["red","blue","orange"])
+
+      var canvas= d3.select("body").append('svg')
+          .attr("width",500)
+          .attr('height',500);
+  
+     var group=canvas.append("g")
+          .attr("transform","translate(300,300)");
+  
+    var arc=d3.svg.arc()
+          .innerRadius(50)
+          .outerRadius(100);
+          
+
+    var pie=d3.layout.pie()
+        .value((d)=>data.length)
+        
+        
+
+    var arcs=group.selectAll(".arc")
+        .data(pie(data))
+        .enter()
+        .append('g')
+        .attr("class","arc")
+        .attr("cursor","pointer")
+        .on('mouseover', function(d, i) {
+      console.log(i);
+      d3.select(this).attr('style', 'fill: orange;');
+      d3.select("#toptext").text(`Metropolitan Areas: ${i.length}`);
+    })
+    .on('mouseout', function(d, i) {
+      d3.select(this).attr('style', 'outline: thin solid clear;');
+      d3.select("#toptext").text(`Metropolitan Areas: ${0}`);
+    });
+      
+      
+        var circle= canvas.append('circle')
+      .attr('cx',300)
+      .attr('cy',300)
+      .attr('r',48)
+      .attr('fill','blue').on('mouseover', function(d, i) {
+      console.log(i);
+      d3.select(this).attr('style', 'fill: orange;');
+      d3.select("#toptext").text(`Metropolitan Areas: ${i.length}`);
+    })
+    .on('mouseout', function(d, i) {
+      d3.select(this).attr('style', 'outline: thin solid clear;');
+      d3.select("#toptext").text(`Metropolitan Areas: ${0}`);
+    });
+      
+
+    arcs.append('path')
+        .attr("d",arc)
+        .attr("fill","red")
+        .attr("border-style","solid")
+        .attr("border-color","white")
+        .attr("border-line","black")
+        .attr("border-width","thick")
+        
+
+    arcs.append('text')
+        .attr('transform', (d)=> "translate(" + arc.centroid(d) + ")")
+        .attr('text-anchor',"middle")
+        .attr("font-size","1.5em")
+        .text((d)=>d.data)
+   
+  </script>
+</body>
+</html>

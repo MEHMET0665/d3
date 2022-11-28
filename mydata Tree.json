@@ -1,0 +1,23 @@
+{
+  "name":"Max",
+  "children":[
+    {
+      "name":"Silvia",
+      "children":[
+        {"name":"Chrag"},
+        {"name":"Robin"},
+        {"name":"Anna"}
+      ]
+    },
+    {"name":"Alev",
+      "children":[
+        {"name":"Ahsen","size":"123"},
+        {"name":"Serra" , "size":"452"},
+        {"name":"Anna", "size":"854"}
+      ]},{
+        "name":"Pinar"
+      }
+  ]
+  
+}
+ 
